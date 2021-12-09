@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PLAYER_CONTROLLER : MonoBehaviour
 {
@@ -25,10 +26,15 @@ public class PLAYER_CONTROLLER : MonoBehaviour
     //GAMEOVER
     public bool gameOver;
 
+    //TEXTO
+    public TextMeshProUGUI scoreText;
+    public int POINTS = 0;
+
     //APARICION DEL PLAYER
     void Start()
     {
         transform.position = new Vector3(0, 100, 0);
+        POINTS = 0;
     }
 
     void Update()
@@ -84,8 +90,14 @@ public class PLAYER_CONTROLLER : MonoBehaviour
                 Instantiate(projectilePrefab, transform.position, gameObject.transform.rotation);
             }
 
-            //AL USAR UN COHETE, SE REALIZA UN SONIDO
-            //playerAudioSource.PlayOneShot(sonidoCohete, 1);
+            scoreText.text = $"Score: {POINTS} / 10";
+
+            if (POINTS == 10)
+            {
+                gameOver = true;
+                    Debug.Log("Win");
+
+            }
         }
     }
 
@@ -95,8 +107,22 @@ public class PLAYER_CONTROLLER : MonoBehaviour
         //CUANDO CHOCA CON LOS OBJETOS LLAMADOS OBSTACLE
         if (otherCollider.gameObject.CompareTag("OBSTACLE"))
         {
+            //AL COLISIONAR CON EL PLAYER, SE DESTRUIRA EL OBJETO
+            Destroy(otherCollider.gameObject);
+
             //COMUNICAMOS QUE HEMOS MUERTO (GAMEOVER)
             gameOver = true;
+            Debug.Log("GameOver");
+        }
+
+        //CUANDO CHOCA CON LOS OBJETOS LLAMADOS POINT
+        if (otherCollider.gameObject.CompareTag("POINT"))
+        {
+            //AL COLISIONAR CON EL PLAYER, SE DESTRUIRA EL OBJETO
+            Destroy(otherCollider.gameObject);
+
+            POINTS = POINTS + 1;
+
         }
     }
 }
