@@ -7,13 +7,10 @@ public class MOOVE_CONSTANT : MonoBehaviour
     //VELOCIDAD LINEAL
     private float speed = 50;
 
-
-
     void Update()
     {
         //VELOCIDAD CONSTANTE HACIA ADELANTE
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
-
     }
 
     private void OnCollisionEnter(Collision otherCollider)
@@ -25,8 +22,6 @@ public class MOOVE_CONSTANT : MonoBehaviour
             Destroy(otherCollider.gameObject);
 
             Destroy(gameObject);
-
         }
     }
-
  }

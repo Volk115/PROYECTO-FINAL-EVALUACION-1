@@ -39,6 +39,7 @@ public class PLAYER_CONTROLLER : MonoBehaviour
 
     void Update()
     {
+        //EN CASO DE NO PERDER LA PARTIDA
         if (!gameOver)
         {
             //VELOCIDAD CONSTANTE HACIA ADELANTE
@@ -92,11 +93,11 @@ public class PLAYER_CONTROLLER : MonoBehaviour
 
             scoreText.text = $"Score: {POINTS} / 10";
 
+            //AL LLEGAR A LOS 10 PUNTOS, SE GANA LA PARTIDA
             if (POINTS == 10)
             {
                 gameOver = true;
                     Debug.Log("Win");
-
             }
         }
     }
@@ -122,7 +123,6 @@ public class PLAYER_CONTROLLER : MonoBehaviour
             Destroy(otherCollider.gameObject);
 
             POINTS = POINTS + 1;
-
         }
     }
 }
